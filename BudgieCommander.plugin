@@ -1,0 +1,7 @@
+[Plugin]
+Loader=python3
+Module=budgie_commander
+Name=Budgie Commander
+Description=Budgie Commander Applet (©2020 lyon21)
+Authors=Lyon21 <nagygyula21@gmail.com>
+Icon=view-grid-symbolic

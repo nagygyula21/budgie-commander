@@ -1,0 +1,17 @@
+{
+    "groups": [
+        {
+            "id": "servers",
+            "title": "Servers"
+        }
+    ],
+    "commands": [
+        {
+            "id": "server01",
+            "title": "Server 01",
+            "command": "<e.g. ssh...>",
+            "group": "servers",
+            "image": "<image_path>"
+        }
+    ]
+}
