@@ -189,7 +189,8 @@ class BudgieCommanderApplet(Budgie.Applet):
         except:
             error_label = Gtk.Label()
             error_label.set_markup("<span font='11'>" + "Wrong configuration file!" + "</span>")
-            error_label.override_color(Gtk.StateType.NORMAL, self.color_text)
+            if not self.config_usesystemstyle:
+                error_label.override_color(Gtk.StateType.NORMAL, self.color_text)
             vbox.pack_start(error_label, True, True, 20)
 
     def buildPage2(self):
@@ -450,7 +451,8 @@ class BudgieCommanderApplet(Budgie.Applet):
         self.config.set_string("general", "bgalpha", str(self.config_bgalpha))
         self.config.set_string("general", "textcolor", self.config_textcolor)
         self.config.set_string("general", "usesystemstyle", str(int(self.config_usesystemstyle)))
-        self.config.save_to_file('config.ini')
+        file_path = join(dirname(abspath(__file__)), 'config.ini')
+        self.config.save_to_file(file_path)
 
         self.buildPages()
         self.showPage1()
