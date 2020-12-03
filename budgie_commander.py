@@ -6,6 +6,7 @@ import gi.repository
 import json 
 from os.path import abspath, dirname, join
 import copy
+from pathlib import Path
 
 gi.require_version('Budgie', '1.0')
 from gi.repository import Budgie, GObject, Gtk, Gio, GdkPixbuf, GLib, Gdk
@@ -53,8 +54,13 @@ class BudgieCommanderApplet(Budgie.Applet):
 
     def loadConfig(self):
         self.config = GLib.KeyFile.new()
-        file_path = join(dirname(abspath(__file__)), 'config.ini')
-        self.config.load_from_file(file_path, 0)
+        
+        try: 
+            
+            self.config.load_from_file(join(Path.home(), ".budgie-commander-config.ini", 0))
+        except:
+            self.config.load_from_file(join(dirname(abspath(__file__)), 'config.ini'), 0)
+
         self.config_file = self.config.get_string('general', 'command_file')
         self.config_maxcol = int(self.config.get_string('general', 'maxcol'))
         self.config_imagesize = int(self.config.get_string('general', 'imagesize'))
@@ -451,8 +457,7 @@ class BudgieCommanderApplet(Budgie.Applet):
         self.config.set_string("general", "bgalpha", str(self.config_bgalpha))
         self.config.set_string("general", "textcolor", self.config_textcolor)
         self.config.set_string("general", "usesystemstyle", str(int(self.config_usesystemstyle)))
-        file_path = join(dirname(abspath(__file__)), 'config.ini')
-        self.config.save_to_file(file_path)
+        self.config.save_to_file(join(Path.home(), ".budgie-commander-config.ini"))
 
         self.buildPages()
         self.showPage1()
