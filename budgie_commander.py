@@ -56,8 +56,7 @@ class BudgieCommanderApplet(Budgie.Applet):
         self.config = GLib.KeyFile.new()
         
         try: 
-            
-            self.config.load_from_file(join(Path.home(), ".budgie-commander-config.ini", 0))
+            self.config.load_from_file(join(Path.home(), ".budgie-commander-config.ini"), 0)
         except:
             self.config.load_from_file(join(dirname(abspath(__file__)), 'config.ini'), 0)
 
